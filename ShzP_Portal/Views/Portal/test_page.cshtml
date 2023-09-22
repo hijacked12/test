@@ -1,0 +1,42 @@
+﻿<link href="/css/site.css" rel="stylesheet">
+<div class="fullscreen-image image_panel swiper">
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide"><img src="/images/digital1.jpg" /></div>
+        <div class="swiper-slide"><img src="/images/digital4.jfif" /></div>
+        <div class="swiper-slide"><img src="/images/shzp_front3.jpg" /></div>
+        <div class="swiper-slide"><img src="/images/digital6.jpg" /></div>
+        <div class="swiper-slide"><img src="/images/shzp_front4.jpg" /></div>
+        <div class="swiper-slide"><img src="/images/digital3.jpg" /></div>
+        <div class="swiper-slide"><img src="/images/digital5.jpg" /></div>
+
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="clearfix"></div>
+</div>
+
+<script>
+    const swiper = new Swiper('.swiper', {
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        loop: true,
+
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        }
+
+    });
+</script>

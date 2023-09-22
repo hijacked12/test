@@ -1,0 +1,97 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Areas/Identity/Pages/_identityLayout.cshtml";
+}
+
+<form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+    <h2 style="text-align:center;">@Localizer["Title"].</h2>
+    <hr />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating">
+                <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" />
+                <label asp-for="Input.FirstName"> @Localizer["surname"] </label>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="form-floating">
+                <input asp-for="Input.LastName" class="form-control" autocomplete="firstname" aria-required="true" />
+                <label asp-for="Input.LastName"> @Localizer["first_name"] </label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+        </div>
+        
+    </div>
+    <br />
+    <div class="form-floating">
+        <input asp-for="Input.UserName" class="form-control" autocomplete="lastname" aria-required="true" />
+        <label asp-for="Input.UserName"> @Localizer["username"] </label>
+        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-floating">
+        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+        <label asp-for="Input.Email"> @Localizer["email"] </label>
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-floating">
+        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+        <label asp-for="Input.Password"> @Localizer["pwd"] </label>
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-floating">
+        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+        <label asp-for="Input.ConfirmPassword"> @Localizer["confirm"] </label>
+        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-floating">
+        <input asp-for="Input.ProfilePicturePath" type="file" class="form-control" name="fileobj" placeholder="@Localizer["pic"]" /><br />
+        <label asp-for="Input.ProfilePicturePath" class="control-label" style="padding-top:8px;"> @Localizer["pic"] </label>
+        <span asp-validation-for="Input.ProfilePicturePath" class="text-danger"></span>
+    </div>
+    <br />
+    <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary"> @Localizer["register"] </button>
+</form>
+
+<div id="registrationSuccessPopup" class="popup">
+    <div class="popup-content">
+        <h2>Registration Successful</h2>
+        <p>Your registration was successful. You can now log in.</p>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Check if registration was successful using TempData
+        var registrationSuccess = @(TempData["RegistrationSuccess"] ?? "false");
+
+        // Function to show the popup
+        function showPopup() {
+            if (registrationSuccess) {
+                var popup = document.getElementById('registrationSuccessPopup');
+                popup.style.display = 'block';
+            }
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            var popup = document.getElementById('registrationSuccessPopup');
+            popup.style.display = 'none';
+        }
+
+        // Call the showPopup function when the page loads
+        window.onload = function () {
+            showPopup();
+        }
+    </script>
+}

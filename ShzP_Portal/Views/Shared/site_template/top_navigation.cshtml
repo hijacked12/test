@@ -1,0 +1,219 @@
+﻿@using ShzP_Portal.Areas.Identity.Data;
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ShzP_PortalUser> UserManager
+
+@{
+    string shortPath = null;
+    var user = await UserManager.GetUserAsync(User);
+    if (user.ProfilePicturePath != null)
+    {
+        shortPath = user.ProfilePicturePath.Split("\\ShzP_Portal\\wwwroot\\")[1];
+    }
+    
+    var guest = "Hi Guest!";
+}
+<style>
+    .fixed-logo {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        max-width: 100%;
+        height: 10px;
+        background-color: #f0f0f0;
+        background-image: url("/images/bosch_top.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 20000; /* Ensure it's above other elements */
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 90%); /* Adjust the clip path as needed */
+    }
+
+    .fixed-top-bar {
+        position: fixed;
+        width: 100%;
+        z-index: 5;
+        /*clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);*/
+        padding-top: 20px;
+    }
+</style>
+<div class="fixed-logo">
+    @*<img src="/images/bosch_top.jpg" alt="..." style=" max-width:100%; height: 20px;
+    max-height: 100%;">*@
+</div>
+<div class="nav_menu fixed-top-bar">
+    <nav>
+        <div class="nav toggle" style="display: inline-flex;">
+            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+
+
+        </div>
+
+        <div id="search_bar" class="nav navbar-nav input-group top_search" style="display: inline-flex;top: 10px; margin-left: 70px;">
+            <input type="text" class="form-control" placeholder="    @Localizer["search"]">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><i class="fa fa-search"></i> </button>
+            </span>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li id="logo_profile" style="padding-right: 95px;">
+                <img src="/images/ShzP-logo2.jpg" alt="" style=" max-width:100%; height: 35px;
+        max-height: 100%; padding-top: 14px;">
+            </li>
+            <li id="profile_drop" class="" style="padding-right: 35px; z-index:200000">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="@shortPath" alt="Profile Image"><b>
+
+                        @*@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName*@
+                        @if (user != null)
+                        {
+
+                            @user.FirstName
+                            <b>&nbsp;</b>
+                            @user.LastName
+                        }
+                        else
+                        {
+                            @guest
+                        }
+                        <span class=" fa fa-angle-down"></span>
+                    </b>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                        <a href="javascript:;">
+                            <span class="badge bg-red pull-right">50%</span>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li>
+
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="">
+                            <form asp-controller="Portal" asp-action="Logout" method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="logout-button">
+                                    Logout
+                                </button><i class="fa fa-sign-out pull-right"></i>
+                            </form>
+                            
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+
+            <!--
+            <li role="presentation" class="dropdown">
+              <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-envelope-o"></i>
+                <span class="badge bg-green"></span>
+              </a>
+              <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                <li>
+                  <a>
+                    <span class="image"><img src="/static/images/img.jpg" alt="Profile Image" /></span>
+                    <span>
+                      <span>John Doe</span>
+                      <span class="time">3 mins ago</span>
+                    </span>
+                    <span class="message">
+                      Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <span class="image"><img src="/static/images/img.jpg" alt="Profile Image" /></span>
+                    <span>
+                      <span>John Doe</span>
+                      <span class="time">3 mins ago</span>
+                    </span>
+                    <span class="message">
+                      Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <span class="image"><img src="/static/images/img.jpg" alt="Profile Image" /></span>
+                    <span>
+                      <span>John Doe</span>
+                      <span class="time">3 mins ago</span>
+                    </span>
+                    <span class="message">
+                      Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <span class="image"><img src="/static/images/img.jpg" alt="Profile Image" /></span>
+                    <span>
+                      <span>John Doe</span>
+                      <span class="time">3 mins ago</span>
+                    </span>
+                    <span class="message">
+                      Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <div class="text-center">
+                    <a>
+                      <strong>See All Alerts</strong>
+                      <i class="fa fa-angle-right"></i>
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </li> -->
+            <a>&nbsp;</a>
+            
+            @if (Thread.CurrentThread.CurrentUICulture.Name == "en-US")
+            {
+                <li id="zh">
+                    <a href="/?ui-culture=zh-Hans" onclick="changeBackground('zh')">
+                        中文
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li id="en">
+                    <a href="/?ui-culture=en-US"  onclick="changeBackground('en')">
+                        EN
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+<script>
+    en = 0
+    zh = 0
+    function changeBackground(lang){
+        var element = document.getElementById(lang);
+        if(lang == "en") {
+            if (en == 0){
+                document.getElementById("zh").style.backgroundColor = '#ededed';
+                zh = 0
+                element.style.backgroundColor = '#fff';
+                en = 1;
+            }
+        }
+        else if(lang == "zh") {
+                if (zh == 0) {
+                    document.getElementById("en").style.backgroundColor = '#ededed';
+                    en = 0
+                    element.style.backgroundColor = '#fff';
+                    zh = 1;
+                }
+        }
+    }
+            
+    
+</script>

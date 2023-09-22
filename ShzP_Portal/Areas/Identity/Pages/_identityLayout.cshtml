@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/alertify.min.css" />
+<link rel="stylesheet" href="/css/toastr.min.css" />
+<link rel="stylesheet" href="/css/roboto.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+
+
+<div class="row justify-content-end" style="padding:150px; background-image: url('/images/shzp_front3.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+    <div style="float:right;">
+        @if (Thread.CurrentThread.CurrentUICulture.Name == "en-US")
+        {
+
+            <a href="?ui-culture=zh-Hans" style="color:aliceblue;float:right;">
+               Change Language: 中文
+            </a>
+
+        }
+        else
+        {
+
+            <a href="/?ui-culture=en-US" style="color:aliceblue;float:right;">
+               Change Language:  EN
+            </a>
+
+        }
+    </div>
+    <div class="col-5 mt-5" style="min-height: 80vh; position: relative;">
+        
+        
+        <div class="card login-logout-card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Identity/Account/Login">
+                            @Localizer["Title1"]
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Identity/Account/Register">
+                            @Localizer["Title2"]
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <div class="col-10 my-4">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@RenderSection("Scripts", required: false)
+@section Scripts{
+    <script src="/lib/jquery/dist/jquery.form.js"></script>
+    <script src="/js/alertify.min.js"></script>
+    <script src="~/js/toastr.min.js"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $(function () {
+            const currentPage = location.pathname;
+            $('.nav-tabs li a').each(function () {
+                const $this = $(this);
+                if (currentPage.toLowerCase().indexOf($this.attr('href').toLowerCase()) != -1{
+                    $this.addClass('active')
+                })
+        })
+                })
+    </script>
+}

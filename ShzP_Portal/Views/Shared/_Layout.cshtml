@@ -1,0 +1,174 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
+@using ShzP_Portal.Areas.Identity.Data;
+@model ShzP_PortalUser
+@inject UserManager<ShzP_PortalUser> UserManager
+@inject IViewLocalizer Localizer
+@using System.Security.Claims
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @if (IsSectionDefined("head"))
+    {
+        @RenderSection("head", required: false)
+    }
+    else
+    {
+        @if (IsSectionDefined("meta"))
+        {
+            @RenderSection("meta", required: false)
+        }
+        else
+        {
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <!-- Meta, title, CSS, favicons, etc. -->
+            <link rel="icon" href="~/images/favicon.ico" type="image/ico" />
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            
+        }
+
+        <title>@ViewData["Title"]</title>
+
+        @if (IsSectionDefined("stylesheets"))
+        {
+            @RenderSection("stylesheets", required: false)
+        }
+        else
+        {
+            <!-- Bootstrap -->
+            <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+            <!-- Font Awesome -->
+            <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+            <!-- NProgress -->
+            <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
+            <!-- bootstrap-daterangepicker -->
+            <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+            <!-- iCheck -->
+            <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+            <!-- bootstrap-progressbar -->
+            <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+            <!-- JQVMap -->
+            <link href="/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+            <link href="/css/swiper-bundle.min.css" rel="stylesheet">
+
+            @RenderSection("stylesheets_ext", required: false)
+        }
+        <!-- Custom Theme Style -->
+        <link href="/css/site.css" rel="stylesheet">
+        <link rel="stylesheet" href="~/css/alertify.min.css" />
+        <link rel="stylesheet" href="~/css/toastr.min.css" />
+        @RenderSection("head_ext", required: false)
+    }
+</head>
+
+<body class="nav-md @ViewData["sidebar_class"]">
+    @if (IsSectionDefined("body"))
+    {
+        @RenderSection("body")
+    }
+    else
+    {
+        <div class="container body">
+            <div class="main_container">
+
+               
+
+                @if (IsSectionDefined("top_navigation"))
+                {
+                    @RenderSection("top_navigation", required: false)
+                }
+                else
+                {
+                    <div class="top_nav">
+                        <partial name="~/Views/Shared/site_template/top_navigation.cshtml" />
+                    </div>
+                    @RenderSection("top_navigation_ext", required: false)
+                }
+
+
+                @if (IsSectionDefined("sidebar"))
+                {
+                    @RenderSection("sidebar", required: false)
+                }
+                else
+                {
+                    <div class="col-md-3 left_col nav-md menu_fixed @RenderSection("sidebar_class", required: false)">
+                        <partial name="~/Views/Shared/site_template/sidebar.cshtml" />
+                    </div>
+                    @RenderSection("sidebar_ext", required: false)
+                }
+
+                <div style="padding-top: 80px;">
+                    
+                    @RenderBody()
+                </div>
+
+                @if (IsSectionDefined("footer"))
+                {
+                    @RenderSection("footer", required: false)
+                }
+                else
+                {
+                    <footer class="nav-md footer_fixed">
+                        <partial name="~/Views/Shared/site_template/footer.cshtml" />
+                    </footer>
+                    @RenderSection("footer_ext", required: false)
+                }
+            </div>
+        </div>
+
+        @if (IsSectionDefined("javascripts"))
+        {
+            @RenderSection("javascripts", required: false)
+        }
+        else
+        {
+            <script src="/js/swiper-bundle.min.js"></script>
+            <!-- jQuery -->
+            <script src="/vendors/jquery/dist/jquery.min.js"></script>
+
+            <script src="/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+            <!-- Bootstrap -->
+            <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- FastClick -->
+            <script src="/vendors/fastclick/lib/fastclick.js"></script>
+            <!-- NProgress -->
+            <script src="/vendors/nprogress/nprogress.js"></script>
+            <!-- bootstrap-progressbar -->
+            <script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+            <!-- iCheck -->
+            <script src="/vendors/iCheck/icheck.min.js"></script>
+            <!-- bootstrap-daterangepicker -->
+            <script src="/vendors/moment/min/moment.min.js"></script>
+            <script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+            <!-- bootstrap-wysiwyg -->
+            <script src="/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+            <script src="/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+            <script src="/vendors/google-code-prettify/src/prettify.js"></script>
+            <!-- jQuery Tags Input -->
+            <script src="/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+            <!-- Switchery -->
+            <script src="/vendors/switchery/dist/switchery.min.js"></script>
+            <!-- Select2 -->
+            <script src="/vendors/select2/dist/js/select2.full.min.js"></script>
+            <!-- Parsley -->
+            <script src="/vendors/parsleyjs/dist/parsley.min.js"></script>
+            <!-- Autosize -->
+            <script src="/vendors/autosize/dist/autosize.min.js"></script>
+            <!-- jQuery autocomplete -->
+            <script src="/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+            <!-- starrr -->
+            <script src="/vendors/starrr/dist/starrr.js"></script>
+            @RenderSection("javascripts_ext", required: false)
+            @RenderSection("Scripts", required: false)
+        }
+        <!-- Custom Theme Scripts -->
+        <script src="/js/site.js"></script>
+        <script src="~/js/alertify.min.js"></script>
+    }
+</body>
+</html>

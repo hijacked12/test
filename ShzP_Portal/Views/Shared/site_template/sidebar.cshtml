@@ -1,0 +1,108 @@
+<div class="left_col scroll-view">
+    <div class="profile_info">
+        <img src="/images/ShzP-logo2.jpg" alt="..." style="object-fit:contain; max-width:100px; width: 150px !important;
+      max-height: 100%; " class="profile clearfix">
+    </div>
+
+
+    <!-- menu profile quick info -->
+    <div class="profile clearfix" style="border-bottom: 2px solid #0a3874; width: 210px;">
+    </div>
+    <!-- /menu profile quick info -->
+
+    <br /><br />
+
+    <!-- sidebar menu -->
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+        
+        <div class="menu_section">
+            @if (Thread.CurrentThread.CurrentUICulture.Name == "zh-Hans")
+            {
+                <h3 style="margin-left: 10px;"> @Localizer["side-nav-head1"] </h3>
+            }
+            else
+            {
+                <h3 style="padding-left: 10px;"> @Localizer["side-nav-head1"] </h3>
+            }
+            <ul class="nav side-menu">
+                <li>
+                    <a href="/"><i class="fa fa-home"></i>@Localizer["head1-child1"]<span class="fa"></span></a>
+                    <!--
+                      <ul class="nav child_menu">
+                        <li><a href="tables.html">Tables</a></li>
+                        <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      </ul>
+                    -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> @Localizer["head1-child2"]  <span class="fa"></span></a>
+                </li>
+                <!-- <li>
+                  <a><i class="fa fa-bug"></i> ## <span class="fa"></span></a>
+                </li> -->
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o"></i> @Localizer["head1-child3"] <span class="fa"></span></a>
+                </li>
+                <!-- <li>
+                  <a><i class="fa fa-sitemap"></i> ## <span class="fa"></span></a>
+                </li> -->
+                <li>
+                    <a href="javascript:void(0)"><i class="fa fa-clone"></i> @Localizer["head1-child4"] </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu_section">
+
+            <br>
+            @if (Thread.CurrentThread.CurrentUICulture.Name == "zh-Hans")
+            {
+                <h3 style="margin-left: 0px;"> @Localizer["side-nav-head2"] </h3>
+            }
+            else
+            {
+                <h3 style="margin-left: 0px;"> @Localizer["side-nav-head2"] </h3>
+            }
+            <ul class="nav side-menu">
+                <li>
+                    <a href="#"><i class="fa fa-shield"></i>   ISP <span class="fa"></span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-desktop"></i> ITM <span class="fa"></span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-tasks"></i> ICO <span class="fa"></span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-laptop"></i> BD <span class="fa"></span></a>
+                </li>
+                <!-- <li>
+                  <a><i class="fa fa-group"></i>Team Chart<span class="fa"></span></a>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+    <!-- /sidebar menu -->
+    <!-- /menu footer buttons -->
+    <div class="sidebar-footer hidden-small">
+        <a data-toggle="tooltip" data-placement="top" title="@Localizer["footer1"]">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="@Localizer["footer2"]">
+            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="@Localizer["footer3"]">
+            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="@Localizer["footer4"]" href="">
+            <form asp-controller="Portal" asp-action="Logout" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="logout-button">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </button>
+            </form>
+        </a>
+        
+    </div>
+    <!-- /menu footer buttons -->
+</div>
